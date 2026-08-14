@@ -3,6 +3,10 @@
 ~870 spoken words, roughly 4:45 at a normal pace. Stage directions in brackets; timings
 cumulative. Delivery: plain and unhurried, no build-up.
 
+Slide cues refer to [slides.md](slides.md) — seven slides: (1) title, (2) the situation,
+(3) architecture, (4) the demo, (5) proves / doesn't prove, (6) economics, (7) recommendation and
+pilot, plus a closing slide.
+
 The demo is the **recorded internal tools kernel walkthrough** — play it on screen and narrate
 over it rather than clicking live. The recording already covers, in order: refund creation as the
 reviewer, the blocked self-approval, the approver's decision with a reason, the audit history,
@@ -11,7 +15,7 @@ trail. Nothing needs to be demoed outside it.
 
 ---
 
-**[camera]**
+**[slide 1 — title]**
 
 The question this team asked me to evaluate was: you're paying roughly $250K a year for Power
 Apps, but you're only using it for three internal tools — a KYC review queue, a refunds
@@ -26,7 +30,7 @@ I used Devin to build a small prototype around the core mechanics these tools ne
 evaluated what the prototype proved, what it did not prove, and what risk would remain in
 production.
 
-**[0:35]**
+**[0:35 — slide 2: the situation]**
 
 Power Apps' value is not that it lets people build screens quickly. For a company like this, the
 value is the platform around the screens: identity integration, connectors, workflow automation,
@@ -38,7 +42,7 @@ But in this case the usage is narrow. This is not hundreds of citizen-developed 
 company. It's three known internal workflows, all owned by engineers. That changes the
 build-versus-buy calculus.
 
-**[1:00 — share screen: repo and README, then the architecture diagram]**
+**[1:00 — share the repo and README briefly, then slide 3: architecture]**
 
 The prototype I built is an internal tools kernel with two flows: refunds and feature flags. A
 shared core handles sessions, role-based authorization, field masking, and audit; each flow is
@@ -50,7 +54,7 @@ I intentionally did not build KYC, because KYC carries the highest PII and compl
 short prototype should not imply that document handling, vendor integration, record retention,
 and audit evidence are solved.
 
-**[1:20 — start the recorded walkthrough: refund queue as the reviewer]**
+**[1:20 — slide 4, then start the recorded walkthrough: refund queue as the reviewer]**
 
 The refunds flow is the higher-risk operational workflow, and I scoped it around one outcome
 rather than a feature list: can a reviewer request a high-value refund, can the system enforce
@@ -88,14 +92,14 @@ That's the strongest build argument, and it's measurable: the kernel plus refund
 hundred lines of code. This entire second tool is about two hundred. Once the kernel exists, the
 marginal cost of the next internal tool is much lower.
 
-**[2:45 — recording ends; show the tests passing, then the PR]**
+**[2:45 — recording ends; show the tests passing and the PR, then slide 5]**
 
 What we replicated is the core application logic: server-side authorization, role-based masking,
 maker-checker approval, append-only audit with per-record history, and reusable list and detail
 screens. Devin was genuinely useful here — for the vendor research, scaffolding this quickly,
 writing the tests, keeping the docs aligned with the code, and reviewing the implementation.
 
-**[camera]**
+**[slide 5 — right column]**
 
 What we did not replicate is the platform. No visual app builder, no Power Automate equivalent,
 no connector ecosystem, no real SSO or SCIM, no DLP policies or managed environments, no
@@ -103,7 +107,7 @@ deployment pipeline, and no compliance-grade audit evidence — append-only is n
 and there's no retention, legal hold, or read-and-export auditing here. It runs on local SQLite
 and it has not had a security review. Those are real gaps, and they're most of the actual cost.
 
-**[3:25]**
+**[3:25 — slide 6: economics]**
 
 I still recommend building, because this company doesn't need to rebuild Power Apps. It needs to
 replace a small number of engineering-owned tools. That's a much smaller problem.
@@ -115,7 +119,7 @@ commitment. Retiring the apps may retire less spend than you'd expect. Second, D
 build cost, not the ownership cost: a quarter to half an engineer, permanently, for patching,
 auth changes, audit requests and on-call. Compare net, not gross.
 
-**[3:55]**
+**[3:55 — slide 7: recommendation and pilot]**
 
 I'd migrate app by app, and keep Power Apps running through the transition.
 
@@ -130,7 +134,7 @@ KYC last, or potentially never, unless the compliance controls are mature: sensi
 integration, document handling, regulated recordkeeping. I would not move it until real SSO,
 access reviews, audit retention, evidence export, and compliance sign-off are in place.
 
-**[4:20]**
+**[4:20 — stay on slide 7, right column]**
 
 So the next step I'd recommend is a two-to-four-week production pilot on feature flags for one
 engineering team. Real SSO with group-to-role mapping, a real database, CI/CD, observability,
@@ -141,6 +145,8 @@ It succeeds if that team is running on it in production, every mutation is audit
 changes are role-gated, SSO mapping works, security review finds nothing blocking, and the
 retired spend clears the cost of owning it. Then migrate flags, evaluate refunds, and leave KYC
 where it is.
+
+**[closing slide]**
 
 The short version: don't build Power Apps. Build the smaller internal tools platform this company
 actually needs. Given the narrow usage and how much Devin reduces implementation cost, I'd pursue
