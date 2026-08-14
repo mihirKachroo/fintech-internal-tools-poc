@@ -144,7 +144,9 @@ src/mocks/      payment provider stub
 src/db/         schema.sql, deterministic seed, reset script
 src/views/      EJS templates (generic list/detail rendering driven by entity config)
 src/tests/      API-level tests for authz, four-eyes, masking and audit
-docs/           research brief, prototype scope, recommendation outline, architecture
+docs/           research brief, prototype scope, recommendation outline, architecture, evaluation
 ```
 
 Design decisions and deviations from the plan: [docs/architecture.md](docs/architecture.md).
+What this prototype does and does not prove, and the build-vs-buy call:
+[docs/evaluation.md](docs/evaluation.md).
