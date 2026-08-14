@@ -1,5 +1,9 @@
 # Architecture (as built)
 
+![Internal tools kernel architecture](architecture-diagram.png)
+
+<sub>Source: [architecture-diagram.svg](architecture-diagram.svg)</sub>
+
 This records what the code actually does and where it diverges from
 [prototype-scope.md](prototype-scope.md), which was written before implementation.
 

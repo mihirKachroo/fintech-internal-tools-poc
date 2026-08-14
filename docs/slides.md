@@ -22,6 +22,7 @@ style: |
   table { font-size: 22px; }
   th { background: #f2f5f8; text-align: left; }
   section::after { color: #9aa8b5; font-size: 16px; }
+  section.diagram { padding: 24px 30px; justify-content: center; align-items: center; }
 ---
 
 <!-- _class: lead -->
@@ -94,6 +95,13 @@ That changes the build-vs-buy calculus.
 
 **KYC intentionally omitted** — highest PII and compliance risk. A short prototype shouldn't imply
 document handling, vendor integration, and retention are solved.
+
+---
+
+<!-- _class: diagram -->
+<!-- _header: '' -->
+
+![h:670](architecture-diagram.png)
 
 ---
 

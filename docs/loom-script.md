@@ -38,17 +38,19 @@ But in this case the usage is narrow. This is not hundreds of citizen-developed 
 company. It's three known internal workflows, all owned by engineers. That changes the
 build-versus-buy calculus.
 
-**[1:00 — share screen: repo and README, then start the recorded walkthrough]**
+**[1:00 — share screen: repo and README, then the architecture diagram]**
 
 The prototype I built is an internal tools kernel with two flows: refunds and feature flags. A
 shared core handles sessions, role-based authorization, field masking, and audit; each flow is
-thin on top of it.
+thin on top of it. Every request goes through the same path — verify the session, check the
+permission, run the business rules and the audit write in one transaction, then mask on the way
+out.
 
 I intentionally did not build KYC, because KYC carries the highest PII and compliance risk. A
 short prototype should not imply that document handling, vendor integration, record retention,
 and audit evidence are solved.
 
-**[1:20 — recording: refund queue as the reviewer]**
+**[1:20 — start the recorded walkthrough: refund queue as the reviewer]**
 
 The refunds flow is the higher-risk operational workflow, and I scoped it around one outcome
 rather than a feature list: can a reviewer request a high-value refund, can the system enforce
