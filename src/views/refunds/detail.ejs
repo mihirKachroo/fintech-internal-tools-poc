@@ -1,0 +1,52 @@
+<%- include('../partials/head', { title: title, user: user, demoUsers: demoUsers, returnTo: '/refunds/' + refund.id }) %>
+<h1>Refund #<%= refund.id %> <span class="pill <%= refund.status %>"><%= refund.status %></span></h1>
+<p class="sub">
+  <a href="/refunds">← All refunds</a> ·
+  <a href="/api/refunds/<%= refund.id %>">JSON as <%= user.role %></a> ·
+  acting as <strong><%= user.name %></strong> (<%= user.role %>)
+</p>
+
+<div class="row">
+  <div class="card">
+    <h2 style="font-size:16px;margin-top:0">Record</h2>
+    <table>
+      <% fields.forEach(function (field) { %>
+        <tr>
+          <th style="width:190px"><%= field.label %></th>
+          <td>
+            <% if (field.masked) { %>
+              <span class="masked" title="masked server-side for role <%= user.role %>"><%= field.value %></span>
+              <span class="muted">masked for <%= user.role %></span>
+            <% } else { %><%= field.value %><% } %>
+          </td>
+        </tr>
+      <% }); %>
+    </table>
+  </div>
+
+  <div class="card">
+    <h2 style="font-size:16px;margin-top:0">Decision</h2>
+    <% if (refund.status !== 'pending_approval') { %>
+      <p class="muted">This refund is <code><%= refund.status %></code>; no decision is pending.</p>
+    <% } else if (!canDecide) { %>
+      <p class="muted">Your role (<%= user.role %>) cannot approve or reject refunds. Server-side checks reject the attempt even if you post the form directly.</p>
+    <% } else { %>
+      <% if (isRequester) { %>
+        <div class="banner">You requested this refund. Four-eyes: a different approver must decide it. Submitting below returns <code>SELF_APPROVAL_BLOCKED</code>.</div>
+      <% } %>
+      <form method="post" action="/refunds/<%= refund.id %>/approve">
+        <label for="reason">Reason (required)</label>
+        <input type="text" id="reason" name="reason" placeholder="Verified against order record" required>
+        <p style="display:flex;gap:8px">
+          <button type="submit" class="primary">Approve</button>
+          <button type="submit" class="danger" formaction="/refunds/<%= refund.id %>/reject">Reject</button>
+        </p>
+      </form>
+    <% } %>
+  </div>
+</div>
+
+<div class="card">
+  <%- include('../partials/history', { history: history }) %>
+</div>
+<%- include('../partials/foot') %>

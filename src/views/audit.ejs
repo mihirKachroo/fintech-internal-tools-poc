@@ -1,0 +1,7 @@
+<%- include('partials/head', { title: title, user: user, demoUsers: demoUsers, returnTo: '/audit' }) %>
+<h1>Audit log</h1>
+<p class="sub">One append-only table for every flow. SQLite triggers reject UPDATE and DELETE.</p>
+<div class="card">
+  <%- include('partials/history', { history: entries }) %>
+</div>
+<%- include('partials/foot') %>

@@ -1,0 +1,5 @@
+<%- include('partials/head', { title: title, user: user, demoUsers: demoUsers, returnTo: '/refunds' }) %>
+<h1><%= status %> · <%= code %></h1>
+<div class="banner"><%= message %></div>
+<p><a href="/refunds">Back to refunds</a></p>
+<%- include('partials/foot') %>
