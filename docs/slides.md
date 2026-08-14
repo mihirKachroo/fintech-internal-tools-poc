@@ -49,11 +49,11 @@ style: |
 <!-- _class: title -->
 <!-- _paginate: false -->
 
-<span class="kicker">Internal tools · build vs buy</span>
+<span class="kicker">Power Apps · build vs buy</span>
 
-# Replace Power Apps — narrowly
+# Build the tools, not the platform
 
-**Build only the tools you actually use. One app at a time.**
+**Build only what you actually use. Migrate one app at a time.**
 
 ---
 
