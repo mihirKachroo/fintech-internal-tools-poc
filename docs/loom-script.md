@@ -3,6 +3,12 @@
 ~870 spoken words, roughly 4:45 at a normal pace. Stage directions in brackets; timings
 cumulative. Delivery: plain and unhurried, no build-up.
 
+The demo is the **recorded internal tools kernel walkthrough** — play it on screen and narrate
+over it rather than clicking live. The recording already covers, in order: refund creation as the
+reviewer, the blocked self-approval, the approver's decision with a reason, the audit history,
+the masked viewer view, the flag toggles including the denied prod attempt, and the flag audit
+trail. Nothing needs to be demoed outside it.
+
 ---
 
 **[camera]**
@@ -32,7 +38,7 @@ But in this case the usage is narrow. This is not hundreds of citizen-developed 
 company. It's three known internal workflows, all owned by engineers. That changes the
 build-versus-buy calculus.
 
-**[1:00 — share screen: repo and README]**
+**[1:00 — share screen: repo and README, then start the recorded walkthrough]**
 
 The prototype I built is an internal tools kernel with two flows: refunds and feature flags. A
 shared core handles sessions, role-based authorization, field masking, and audit; each flow is
@@ -42,35 +48,35 @@ I intentionally did not build KYC, because KYC carries the highest PII and compl
 short prototype should not imply that document handling, vendor integration, record retention,
 and audit evidence are solved.
 
-**[1:20 — switch to the app, /refunds as a reviewer]**
+**[1:20 — recording: refund queue as the reviewer]**
 
 The refunds flow is the higher-risk operational workflow, and I scoped it around one outcome
 rather than a feature list: can a reviewer request a high-value refund, can the system enforce
 separation of duties, require a reason, and leave an audit trail you'd be willing to hand to an
 auditor?
 
-So — I request an $820 refund. It's over the threshold, so it parks in pending approval, and
-notice the payment provider has not been called. No money has moved.
+Here I'm requesting an $820 refund as a reviewer. It's over the threshold, so it parks in pending
+approval — and notice the payment provider has not been called. No money has moved.
 
-Now I try to approve my own request. Blocked. That's enforced on the server, not by hiding a
-button in the UI.
+Then, as the same person who requested it, I try to approve it. Blocked. That's enforced on the
+server, not by hiding a button in the UI.
 
-**[switch user to the approver; approve with a reason]**
+**[recording: switching to the approver, approving with a reason]**
 
 A different approver, and a reason is required. Now it settles, through a mocked provider that
 records an idempotency key — the integration is mocked, but the boundary is explicit.
 
-**[open the history panel]**
+**[recording: the history panel]**
 
 And here's the trail: requested, approved, settled, each with actor, role, reason, before and
 after values, and a request ID. That table is append-only, enforced by the database itself.
 
-**[switch user to the viewer, then show the JSON response]**
+**[recording: the viewer's masked detail page, then the masked JSON response]**
 
 As a low-privilege viewer, the card tail, email and bank account are masked — and masked in the
 API response, not just hidden in the page. That's the difference between a control and a cosmetic.
 
-**[2:20 — switch to /flags]**
+**[2:20 — recording: the flags screen]**
 
 The feature flag flow demonstrates reuse. Same permission and audit machinery, different tool.
 Production toggles are admin-only: as an approver, denied; as an admin, it goes through and it's
@@ -80,7 +86,7 @@ That's the strongest build argument, and it's measurable: the kernel plus refund
 hundred lines of code. This entire second tool is about two hundred. Once the kernel exists, the
 marginal cost of the next internal tool is much lower.
 
-**[2:45 — show tests, then the PR]**
+**[2:45 — recording ends; show the tests passing, then the PR]**
 
 What we replicated is the core application logic: server-side authorization, role-based masking,
 maker-checker approval, append-only audit with per-record history, and reusable list and detail
