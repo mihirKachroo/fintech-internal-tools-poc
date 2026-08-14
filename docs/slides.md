@@ -53,9 +53,7 @@ style: |
 
 # Replace Power Apps — narrowly
 
-**Build the three tools you actually use. Migrate one app at a time. Keep Power Apps running through the transition.**
-
-<span class="muted">Series C fintech · ~60 engineers · ~$250K/year · KYC queue, refunds dashboard, feature-flag admin</span>
+**Build only the tools you actually use. One app at a time.**
 
 ---
 
@@ -78,14 +76,14 @@ style: |
 
 ### What this company uses
 
-- **Three** internal workflows
-- All **engineering-owned**
+- **Three** internal workflows: KYC queue, refunds dashboard, feature-flag admin
+- All **engineering-owned**, ~60 engineers
 - No non-engineer maker community
 - No connector sprawl
 
 <div class="card">
 
-The platform is priced for a citizen-developer program. You're running three apps.
+~$250K/year buys a citizen-developer program. You're running three apps.
 
 </div>
 
