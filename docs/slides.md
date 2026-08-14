@@ -31,7 +31,8 @@ style: |
   .cols > div { flex: 1; }
   .card { background: #f4f7fa; border-radius: 12px; padding: 22px 26px; }
   .card.warn { background: #fdf7ee; }
-  .muted { color: #5a6b7c; font-size: 21px; }
+  .muted { color: #5a6b7c; font-size: 20px; }
+  section.tight { font-size: 25px; }
   .kicker { color: #0b4f9e; font-size: 20px; letter-spacing: 1.6px; text-transform: uppercase; font-weight: bold; }
   section.title { background: #0f1b2a; color: #ffffff; justify-content: center; }
   section.title h1 { color: #ffffff; font-size: 58px; }
@@ -106,14 +107,14 @@ style: |
 <div class="cols">
 <div>
 
-### Refunds — the hard one
+### Refunds: the hard one
 
 $820 request parks unpaid · self-approval **blocked server-side** · second approver must give a reason · full history with actor, role, before/after · viewer sees masked PII **in the API response**
 
 </div>
 <div>
 
-### Flags — the reuse proof
+### Flags: the reuse proof
 
 Same authorization and audit machinery · prod toggles admin-only · **~495 lines** for refunds, **~215** for the second tool
 
@@ -124,7 +125,9 @@ Same authorization and audit machinery · prod toggles admin-only · **~495 line
 
 ---
 
-## What it proves — and what it doesn't
+<!-- _class: tight -->
+
+## What it proves, and what it doesn't
 
 <div class="cols">
 <div>
@@ -146,13 +149,13 @@ Same authorization and audit machinery · prod toggles admin-only · **~495 line
 - Visual builder, Power Automate, connectors
 - Real SSO / SCIM, DLP, managed environments
 - Deployment pipeline, production ownership
-- **Compliance-grade audit evidence** — append-only ≠ tamper-evident; no retention or legal hold
-- Local SQLite; no security review
+- **Compliance-grade audit evidence**: append-only is not tamper-evident, and there is no retention or legal hold
+- Local SQLite, no security review
 
 </div>
 </div>
 
-<span class="muted">Devin accelerated the research, scaffolding, tests, docs and review. The architecture and security calls are mine to defend.</span>
+<span class="muted">Devin accelerated research, scaffolding, tests, docs and review. The architecture and security calls are mine to defend.</span>
 
 ---
 
@@ -165,7 +168,7 @@ Same authorization and audit machinery · prod toggles admin-only · **~495 line
 
 ### 1 · Confirm the $250K
 
-At list pricing it implies **~1,000 seats** — which doesn't match 3 apps and 60 engineers. Likely bundles automation, premium connectors, capacity, or an enterprise commitment.
+At list pricing it implies **~1,000 seats**, which doesn't match 3 apps and 60 engineers. Likely bundles automation, premium connectors, capacity, or an enterprise commitment.
 
 **Retiring the apps may retire less spend than expected.**
 
@@ -196,9 +199,9 @@ Devin changes build cost, not ownership cost: **0.25–0.5 FTE permanently** for
 
 ### Migrate app by app
 
-1. **Feature flags first** — engineering-owned, no customer PII
-2. **Refunds second** — only after security, finance and audit review; it moves money
-3. **KYC last, or never** — PII, vendor integration, regulated recordkeeping
+1. **Feature flags first.** Engineering-owned, no customer PII
+2. **Refunds second.** Only after security, finance and audit review; it moves money
+3. **KYC last, or never.** PII, vendor integration, regulated recordkeeping
 
 </div>
 <div>
@@ -221,4 +224,4 @@ Feature-flag admin, **one engineering team, in production**. Real SSO group→ro
 
 **Build the smaller internal tools platform this company actually needs.**
 
-<span class="muted">Narrow usage, a real kernel, and a staged migration — decided on pilot evidence in a month, not on a platform bet.</span>
+<span class="muted">Narrow usage, a real kernel, a staged migration. Decided on pilot evidence in a month, not on a platform bet.</span>
