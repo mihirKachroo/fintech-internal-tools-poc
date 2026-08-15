@@ -1,0 +1,38 @@
+<%- include('../partials/head', { title: title, user: user, demoUsers: demoUsers, returnTo: '/flags' }) %>
+<h1>Feature flag admin</h1>
+<p class="sub">
+  Same kernel as refunds: same RBAC, same audit writer, different config ·
+  production toggles are admin-only · acting as <strong><%= user.name %></strong> (<%= user.role %>)
+</p>
+<div class="mock">MOCK: a real flag SDK would read <code>GET /api/flags?env=dev</code>. No caching, streaming or edge delivery here.</div>
+
+<table>
+  <tr>
+    <th>Flag</th><th>Owner</th>
+    <% environments.forEach(function (env) { %><th><%= env %></th><% }); %>
+    <th>History</th>
+  </tr>
+  <% flags.forEach(function (flag) { %>
+    <tr>
+      <td><code><%= flag.key %></code><br><span class="muted"><%= flag.description %></span></td>
+      <td><%= flag.owner %></td>
+      <% environments.forEach(function (env) { %>
+        <% var state = flag.states[env]; %>
+        <td>
+          <span class="pill <%= state.enabled ? 'on' : 'off' %>"><%= state.enabled ? 'on' : 'off' %></span>
+          <% if (canToggle[env]) { %>
+            <form method="post" action="/flags/<%= flag.id %>/toggle" style="margin-top:6px">
+              <input type="hidden" name="environment" value="<%= env %>">
+              <input type="hidden" name="enabled" value="<%= state.enabled ? 'false' : 'true' %>">
+              <button type="submit"><%= state.enabled ? 'Turn off' : 'Turn on' %></button>
+            </form>
+          <% } else { %>
+            <div class="muted" style="margin-top:6px">admin only</div>
+          <% } %>
+        </td>
+      <% }); %>
+      <td><a href="/flags/<%= flag.id %>">View</a></td>
+    </tr>
+  <% }); %>
+</table>
+<%- include('../partials/foot') %>

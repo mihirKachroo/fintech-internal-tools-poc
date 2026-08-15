@@ -1,0 +1,56 @@
+<%- include('../partials/head', { title: title, user: user, demoUsers: demoUsers, returnTo: '/refunds' }) %>
+<h1>Refunds dashboard</h1>
+<p class="sub">
+  <%= result.total.toLocaleString('en-US') %> refund requests ·
+  refunds above $<%= thresholdDollars.toLocaleString('en-US') %> need a second approver ·
+  acting as <strong><%= user.name %></strong> (<%= user.role %>)
+</p>
+
+<form method="get" action="/refunds" class="card" style="display:flex;gap:12px;align-items:flex-end;flex-wrap:wrap">
+  <div style="flex:1 1 220px">
+    <label for="q">Customer or refund id</label>
+    <input type="text" name="q" id="q" value="<%= query %>" placeholder="e.g. Chen or 1042">
+  </div>
+  <div style="flex:0 1 200px">
+    <label for="status">Status</label>
+    <select name="status" id="status">
+      <% ['', 'pending_approval', 'processed', 'rejected'].forEach(function (option) { %>
+        <option value="<%= option %>" <%= option === status ? 'selected' : '' %>><%= option === '' ? 'Any' : option %></option>
+      <% }); %>
+    </select>
+  </div>
+  <button type="submit" class="primary">Filter</button>
+  <% if (canRequest) { %><a href="/refunds/new" style="margin-left:auto"><button type="button">Request refund</button></a><% } %>
+</form>
+
+<table>
+  <tr><% columns.forEach(function (column) { %><th><%= column.label %></th><% }); %></tr>
+  <% rows.forEach(function (row) { %>
+    <tr>
+      <% row.cells.forEach(function (cell, index) { %>
+        <td>
+          <% if (index === 0) { %>
+            <a href="/refunds/<%= row.id %>">#<%= cell.value %></a>
+          <% } else if (cell.name === 'status') { %>
+            <span class="pill <%= cell.value %>"><%= cell.value %></span>
+          <% } else if (cell.masked) { %>
+            <span class="masked" title="masked for role <%= user.role %>"><%= cell.value %></span>
+          <% } else { %>
+            <%= cell.value %>
+          <% } %>
+        </td>
+      <% }); %>
+    </tr>
+  <% }); %>
+</table>
+
+<div class="pager">
+  <% if (result.page > 1) { %>
+    <a href="/refunds?page=<%= result.page - 1 %>&status=<%= status %>&q=<%= query %>">Previous</a>
+  <% } %>
+  <span class="muted">Page <%= result.page %> of <%= result.pageCount %></span>
+  <% if (result.page < result.pageCount) { %>
+    <a href="/refunds?page=<%= result.page + 1 %>&status=<%= status %>&q=<%= query %>">Next</a>
+  <% } %>
+</div>
+<%- include('../partials/foot') %>

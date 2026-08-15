@@ -1,0 +1,31 @@
+{
+  "name": "fintech-internal-tools-poc",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Config-driven internal-tools kernel: refunds dashboard + feature-flag admin (Power Apps build-vs-buy prototype)",
+  "license": "MIT",
+  "scripts": {
+    "start": "npm run reset && tsx src/server.ts",
+    "dev": "tsx watch src/server.ts",
+    "reset": "tsx src/db/reset.ts",
+    "test": "npm run typecheck && tsx --test src/**/*.test.ts",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "better-sqlite3": "^11.7.0",
+    "cookie-parser": "^1.4.7",
+    "ejs": "^3.1.10",
+    "express": "^4.21.2",
+    "jsonwebtoken": "^9.0.2"
+  },
+  "devDependencies": {
+    "@types/better-sqlite3": "^7.6.12",
+    "@types/cookie-parser": "^1.4.8",
+    "@types/express": "^4.17.21",
+    "@types/jsonwebtoken": "^9.0.7",
+    "@types/node": "^20.17.10",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.2"
+  }
+}

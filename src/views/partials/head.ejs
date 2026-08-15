@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title><%= title %> · Internal Tools Kernel</title>
+<style>
+  :root { --line: #d8dce3; --ink: #16191d; --muted: #6b7280; --accent: #1b4ed8; --bad: #b42318; --ok: #067647; }
+  * { box-sizing: border-box; }
+  body { margin: 0; font: 14px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; color: var(--ink); background: #f7f8fa; }
+  header { background: #fff; border-bottom: 1px solid var(--line); padding: 10px 20px; display: flex; gap: 24px; align-items: center; flex-wrap: wrap; }
+  header .brand { font-weight: 600; }
+  header nav a { margin-right: 14px; color: var(--accent); text-decoration: none; }
+  header form { margin-left: auto; display: flex; gap: 8px; align-items: center; }
+  main { padding: 20px; max-width: 1180px; }
+  h1 { font-size: 20px; margin: 0 0 4px; }
+  p.sub { color: var(--muted); margin: 0 0 18px; }
+  table { border-collapse: collapse; width: 100%; background: #fff; border: 1px solid var(--line); }
+  th, td { text-align: left; padding: 7px 10px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  th { background: #f0f2f5; font-size: 12px; text-transform: uppercase; letter-spacing: .04em; color: var(--muted); }
+  tr:last-child td { border-bottom: none; }
+  .masked { color: var(--muted); font-family: ui-monospace, monospace; }
+  .card { background: #fff; border: 1px solid var(--line); padding: 16px; margin-bottom: 18px; }
+  .row { display: flex; gap: 24px; flex-wrap: wrap; }
+  .row > .card { flex: 1 1 380px; }
+  label { display: block; font-size: 12px; color: var(--muted); margin: 10px 0 3px; }
+  input[type=text], input[type=number], input[type=email], select, textarea { width: 100%; padding: 6px 8px; border: 1px solid var(--line); border-radius: 3px; font: inherit; }
+  button { font: inherit; padding: 6px 12px; border: 1px solid var(--line); background: #fff; border-radius: 3px; cursor: pointer; }
+  button.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+  button.danger { border-color: var(--bad); color: var(--bad); }
+  .pill { display: inline-block; padding: 1px 8px; border-radius: 10px; font-size: 12px; border: 1px solid var(--line); }
+  .pill.on { color: var(--ok); border-color: var(--ok); }
+  .pill.off { color: var(--muted); }
+  .pill.pending_approval { color: #b54708; border-color: #b54708; }
+  .pill.processed { color: var(--ok); border-color: var(--ok); }
+  .pill.rejected { color: var(--bad); border-color: var(--bad); }
+  .banner { border: 1px solid #b54708; background: #fffaeb; color: #93370d; padding: 8px 12px; margin-bottom: 16px; }
+  .mock { border: 1px dashed var(--muted); background: #fff; color: var(--muted); padding: 8px 12px; margin-bottom: 16px; font-size: 13px; }
+  code, pre { font-family: ui-monospace, monospace; font-size: 12px; }
+  pre { margin: 2px 0; white-space: pre-wrap; }
+  .muted { color: var(--muted); }
+  .pager { margin-top: 12px; display: flex; gap: 10px; align-items: center; }
+</style>
+</head>
+<body>
+<header>
+  <span class="brand">Internal Tools Kernel</span>
+  <nav>
+    <a href="/refunds">Refunds</a>
+    <a href="/flags">Feature flags</a>
+    <a href="/audit">Audit log</a>
+    <a href="/api/flags?env=dev">/api/flags</a>
+  </nav>
+  <form method="post" action="/switch-user">
+    <label for="user_id" style="margin:0">Acting as</label>
+    <select name="user_id" id="user_id">
+      <% demoUsers.forEach(function (candidate) { %>
+        <option value="<%= candidate.id %>" <%= candidate.id === user.id ? 'selected' : '' %>>
+          <%= candidate.name %> (<%= candidate.role %>)
+        </option>
+      <% }); %>
+    </select>
+    <input type="hidden" name="return_to" value="<%= typeof returnTo === 'string' ? returnTo : '/refunds' %>">
+    <button type="submit">Switch</button>
+  </form>
+</header>
+<main>

@@ -1,0 +1,7 @@
+<%- include('../partials/head', { title: title, user: user, demoUsers: demoUsers, returnTo: '/flags/' + flag.id }) %>
+<h1><code><%= flag.key %></code></h1>
+<p class="sub"><a href="/flags">← All flags</a> · <%= flag.description %> · owner <%= flag.owner %></p>
+<div class="card">
+  <%- include('../partials/history', { history: history }) %>
+</div>
+<%- include('../partials/foot') %>

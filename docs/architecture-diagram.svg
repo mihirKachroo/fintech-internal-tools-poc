@@ -1,0 +1,136 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1000" viewBox="0 0 1600 1000" font-family="Helvetica, Arial, sans-serif">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#4a6076"/>
+    </marker>
+    <marker id="arrowLight" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#9aa8b5"/>
+    </marker>
+    <filter id="card" x="-4%" y="-8%" width="108%" height="120%">
+      <feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="#0f1b2a" flood-opacity="0.10"/>
+    </filter>
+  </defs>
+
+  <rect width="1600" height="1000" fill="#ffffff"/>
+
+  <text x="60" y="66" font-size="34" font-weight="bold" fill="#0f1b2a">Internal tools kernel: architecture</text>
+  <text x="60" y="98" font-size="20" fill="#5a6b7c">TypeScript · Express · SQLite · server-rendered EJS. Shared kernel; each tool is a thin flow on top.</text>
+
+  <!-- clients -->
+  <g filter="url(#card)">
+    <rect x="60" y="140" width="368" height="86" rx="10" fill="#f7f9fb" stroke="#d8e0e8"/>
+    <rect x="456" y="140" width="368" height="86" rx="10" fill="#f7f9fb" stroke="#d8e0e8"/>
+  </g>
+  <text x="84" y="176" font-size="21" font-weight="bold" fill="#16202b">Operator browser</text>
+  <text x="84" y="204" font-size="16" fill="#5a6b7c">server-rendered pages, demo user switcher</text>
+  <text x="480" y="176" font-size="21" font-weight="bold" fill="#16202b">API clients / flag SDK seam</text>
+  <text x="480" y="204" font-size="16" fill="#5a6b7c">GET /api/flags?env=dev · Bearer JWT</text>
+
+  <!-- request pipeline -->
+  <rect x="60" y="272" width="1480" height="176" rx="14" fill="#f2f6fa" stroke="#cfdce8"/>
+  <text x="1516" y="304" font-size="15" font-weight="bold" letter-spacing="1.4" text-anchor="end" fill="#0b4f9e">EVERY REQUEST · DENY BY DEFAULT</text>
+
+  <g filter="url(#card)">
+    <rect x="84" y="322" width="316" height="102" rx="10" fill="#ffffff" stroke="#b9cdde"/>
+    <rect x="436" y="322" width="316" height="102" rx="10" fill="#ffffff" stroke="#b9cdde"/>
+    <rect x="788" y="322" width="316" height="102" rx="10" fill="#ffffff" stroke="#b9cdde"/>
+    <rect x="1140" y="322" width="376" height="102" rx="10" fill="#ffffff" stroke="#b9cdde"/>
+  </g>
+  <text x="106" y="356" font-size="20" font-weight="bold" fill="#16202b">1 · sessionMiddleware</text>
+  <text x="106" y="382" font-size="16" fill="#5a6b7c">verifies signed JWT</text>
+  <text x="106" y="404" font-size="16" fill="#5a6b7c">assigns request id</text>
+
+  <text x="458" y="356" font-size="20" font-weight="bold" fill="#16202b">2 · requirePermission</text>
+  <text x="458" y="382" font-size="16" fill="#5a6b7c">role → permission check</text>
+  <text x="458" y="404" font-size="16" fill="#5a6b7c">server-side, not UI hiding</text>
+
+  <text x="810" y="356" font-size="20" font-weight="bold" fill="#16202b">3 · flow service</text>
+  <text x="810" y="382" font-size="16" fill="#5a6b7c">business rules, owns the</text>
+  <text x="810" y="404" font-size="16" fill="#5a6b7c">transaction (mutation + audit)</text>
+
+  <text x="1162" y="356" font-size="20" font-weight="bold" fill="#16202b">4 · masking serializer</text>
+  <text x="1162" y="382" font-size="16" fill="#5a6b7c">redacts by role before HTML</text>
+  <text x="1162" y="404" font-size="16" fill="#5a6b7c">or JSON leaves the process</text>
+
+  <line x1="400" y1="373" x2="432" y2="373" stroke="#4a6076" stroke-width="2.5" marker-end="url(#arrow)"/>
+  <line x1="752" y1="373" x2="784" y2="373" stroke="#4a6076" stroke-width="2.5" marker-end="url(#arrow)"/>
+  <line x1="1104" y1="373" x2="1136" y2="373" stroke="#4a6076" stroke-width="2.5" marker-end="url(#arrow)"/>
+  <line x1="225" y1="230" x2="225" y2="318" stroke="#4a6076" stroke-width="2.5" marker-end="url(#arrow)"/>
+  <line x1="620" y1="230" x2="620" y2="318" stroke="#4a6076" stroke-width="2.5" marker-end="url(#arrow)"/>
+
+  <!-- flows -->
+  <g filter="url(#card)">
+    <rect x="60" y="496" width="500" height="196" rx="12" fill="#ffffff" stroke="#d8e0e8"/>
+    <rect x="590" y="496" width="500" height="196" rx="12" fill="#ffffff" stroke="#d8e0e8"/>
+  </g>
+  <rect x="60" y="496" width="500" height="6" rx="3" fill="#0b4f9e"/>
+  <rect x="590" y="496" width="500" height="6" rx="3" fill="#0b4f9e"/>
+  <text x="84" y="542" font-size="22" font-weight="bold" fill="#16202b">Refunds dashboard</text>
+  <text x="84" y="574" font-size="17" fill="#3d4d5c">· list / detail over 2,400 seeded refunds</text>
+  <text x="84" y="600" font-size="17" fill="#3d4d5c">· maker-checker above $500</text>
+  <text x="84" y="626" font-size="17" fill="#3d4d5c">· self-approval blocked, reason required</text>
+  <text x="84" y="652" font-size="17" fill="#3d4d5c">· settlement via mocked provider</text>
+  <text x="84" y="678" font-size="15" fill="#8a97a4">~495 lines</text>
+
+  <text x="614" y="542" font-size="22" font-weight="bold" fill="#16202b">Feature flag admin</text>
+  <text x="614" y="574" font-size="17" fill="#3d4d5c">· state per env: dev / staging / prod</text>
+  <text x="614" y="600" font-size="17" fill="#3d4d5c">· prod toggles admin-only</text>
+  <text x="614" y="626" font-size="17" fill="#3d4d5c">· every toggle audited</text>
+  <text x="614" y="652" font-size="17" fill="#3d4d5c">· read endpoint for the SDK seam</text>
+  <text x="614" y="678" font-size="15" fill="#8a97a4">~215 lines: the marginal cost of tool #2</text>
+
+  <!-- mocked provider -->
+  <g filter="url(#card)">
+    <rect x="1120" y="496" width="420" height="196" rx="12" fill="#fffaf2" stroke="#e8d5b5" stroke-dasharray="7 5"/>
+  </g>
+  <text x="1144" y="542" font-size="22" font-weight="bold" fill="#7a5a1e">Mocked boundary</text>
+  <text x="1144" y="574" font-size="17" fill="#7a5a1e">Payment provider: deterministic,</text>
+  <text x="1144" y="600" font-size="17" fill="#7a5a1e">records an idempotency key</text>
+  <text x="1144" y="632" font-size="17" fill="#7a5a1e">Identity: seeded users + signed JWT</text>
+  <text x="1144" y="658" font-size="17" fill="#7a5a1e">stands in for real SSO / SCIM</text>
+  <text x="1144" y="682" font-size="15" fill="#a78a55">explicit seams, not hidden assumptions</text>
+
+  <line x1="1090" y1="594" x2="1116" y2="594" stroke="#c9a86a" stroke-width="2" stroke-dasharray="6 4" marker-end="url(#arrowLight)"/>
+
+  <!-- kernel -->
+  <rect x="60" y="726" width="1030" height="132" rx="12" fill="#eaf1f8" stroke="#b9cdde"/>
+  <text x="84" y="758" font-size="15" font-weight="bold" letter-spacing="1.4" fill="#0b4f9e">SHARED KERNEL: ~400 LINES, REUSED BY BOTH FLOWS</text>
+  <g font-size="17" fill="#16202b">
+    <rect x="84" y="776" width="186" height="62" rx="8" fill="#ffffff" stroke="#cfdce8"/>
+    <text x="100" y="802" font-weight="bold">config</text>
+    <text x="100" y="824" font-size="14" fill="#5a6b7c">entities, roles, masks</text>
+
+    <rect x="286" y="776" width="186" height="62" rx="8" fill="#ffffff" stroke="#cfdce8"/>
+    <text x="302" y="802" font-weight="bold">auth</text>
+    <text x="302" y="824" font-size="14" fill="#5a6b7c">JWT sessions</text>
+
+    <rect x="488" y="776" width="186" height="62" rx="8" fill="#ffffff" stroke="#cfdce8"/>
+    <text x="504" y="802" font-weight="bold">rbac</text>
+    <text x="504" y="824" font-size="14" fill="#5a6b7c">assertCan(role, perm)</text>
+
+    <rect x="690" y="776" width="186" height="62" rx="8" fill="#ffffff" stroke="#cfdce8"/>
+    <text x="706" y="802" font-weight="bold">masking</text>
+    <text x="706" y="824" font-size="14" fill="#5a6b7c">PII / PCI by role</text>
+
+    <rect x="892" y="776" width="174" height="62" rx="8" fill="#ffffff" stroke="#cfdce8"/>
+    <text x="908" y="802" font-weight="bold">audit</text>
+    <text x="908" y="824" font-size="14" fill="#5a6b7c">one writer, in-tx</text>
+  </g>
+
+  <!-- storage -->
+  <g filter="url(#card)">
+    <rect x="1120" y="726" width="420" height="132" rx="12" fill="#ffffff" stroke="#d8e0e8"/>
+  </g>
+  <text x="1144" y="762" font-size="22" font-weight="bold" fill="#16202b">SQLite</text>
+  <text x="1144" y="792" font-size="17" fill="#3d4d5c">users · refunds · feature_flags · flag_states</text>
+  <text x="1144" y="822" font-size="17" font-weight="bold" fill="#0b4f9e">audit_log</text>
+  <text x="1234" y="822" font-size="17" fill="#3d4d5c">Append-only, enforced by</text>
+  <text x="1144" y="846" font-size="17" fill="#3d4d5c">triggers that reject UPDATE and DELETE</text>
+
+  <line x1="310" y1="700" x2="310" y2="722" stroke="#4a6076" stroke-width="2.5" marker-end="url(#arrow)"/>
+  <line x1="840" y1="700" x2="840" y2="722" stroke="#4a6076" stroke-width="2.5" marker-end="url(#arrow)"/>
+  <line x1="1090" y1="792" x2="1116" y2="792" stroke="#4a6076" stroke-width="2.5" marker-end="url(#arrow)"/>
+
+  <text x="60" y="908" font-size="17" fill="#5a6b7c">Config lives in reviewed TypeScript, in git. There is no runtime visual builder. Authorization, masking and audit are kernel concerns, so a new tool inherits them by construction.</text>
+  <text x="60" y="936" font-size="17" fill="#8a97a4">Not built: KYC flow · real SSO/SCIM · connector ecosystem · managed environments/DLP · deployment pipeline · tamper-evident retention and legal hold.</text>
+</svg>

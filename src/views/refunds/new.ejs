@@ -1,0 +1,20 @@
+<%- include('../partials/head', { title: title, user: user, demoUsers: demoUsers, returnTo: '/refunds/new' }) %>
+<h1>Request a refund</h1>
+<p class="sub">Above $<%= thresholdDollars.toLocaleString('en-US') %> this parks in <code>pending_approval</code> for a second person.</p>
+<div class="mock">MOCK: the payment provider is a stub. No money moves; an idempotency key is recorded.</div>
+<form method="post" action="/refunds" class="card" style="max-width:520px">
+  <label for="customer_name">Customer name</label>
+  <input type="text" id="customer_name" name="customer_name" value="Jules Chen" required>
+  <label for="customer_email">Customer email</label>
+  <input type="email" id="customer_email" name="customer_email" value="jules.chen@example.com" required>
+  <label for="amount">Amount (USD)</label>
+  <input type="number" id="amount" name="amount" step="0.01" min="0.01" value="820.00" required>
+  <label for="card_last4">Card last 4</label>
+  <input type="text" id="card_last4" name="card_last4" value="4242" required>
+  <label for="bank_account">Bank account</label>
+  <input type="text" id="bank_account" name="bank_account" value="DE89370400440532013000" required>
+  <label for="reason">Reason</label>
+  <input type="text" id="reason" name="reason" value="Duplicate charge" required>
+  <p><button type="submit" class="primary">Submit request</button></p>
+</form>
+<%- include('../partials/foot') %>
